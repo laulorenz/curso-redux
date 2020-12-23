@@ -2,7 +2,7 @@
 <footer class="footer">
   <!-- This should be `0 items left` by default -->
   <span class="todo-count">
-    <strong>0</strong>
+    <strong>{{pendientes}}</strong>
     pendientes
   </span>
   <!-- Remove this if you don't implement routing -->
@@ -15,7 +15,7 @@
         href="#/"
         [class.selected]="filtro === filtroActual"
       >
-        {{filtro}}
+        {{filtro | titlecase}}
       </a>
     </li>
   </ul>
