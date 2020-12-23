@@ -6,7 +6,7 @@ import * as actions from './todo.actions';
 export const estadoinicial: Todo[] = [
   new Todo('Salvar al mundo'),
   new Todo('Vencer a Thanos'),
-  new Todo('Comprar traje de ironman'),
+  new Todo('Comprar traje de Ironman'),
   new Todo('Robar escudo del capitan america')
 ];
 
