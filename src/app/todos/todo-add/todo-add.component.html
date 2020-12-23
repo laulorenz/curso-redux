@@ -4,5 +4,7 @@
     class="new-todo"
     placeholder="Que quieres hacer?"
     autofocus
+    [formControl]="txtInput"
+    (keyup.enter)="agregar()"
   >
 </header>
