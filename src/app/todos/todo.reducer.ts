@@ -28,6 +28,22 @@ const _todoReducer = createReducer(
     });
   }),
 
+  on(actions.editar, (state, { id, texto }) => {
+    return state.map(todo => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          texto
+        };
+      } else {
+        return todo;
+      }
+    });
+  }),
+
+  on(actions.borrar, (state, { id }) => {
+    return state.filter(todo => todo.id !== id);
+  })
 )
 
 export function todoReducer(state, action) {

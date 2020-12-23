@@ -28,13 +28,14 @@ export class TodoItemComponent implements OnInit {
     this.chkCompletado = new FormControl(this.todo.completado);
     this.txtInput = new FormControl(this.todo.texto, Validators.required);
 
-    this.chkCompletado.valueChanges.subscribe((valor) => {
+    this.chkCompletado.valueChanges.subscribe(() => {
       this.store.dispatch(actions.toggle({ id: this.todo.id }));
     });
   }
 
   public editar(): void {
     this.editando = true;
+    this.txtInput.setValue(this.todo.texto);
 
     setTimeout(() => {
       this.txtInputFisico.nativeElement.select();
@@ -43,6 +44,22 @@ export class TodoItemComponent implements OnInit {
 
   public terminarEdicion(): void {
     this.editando = false;
+
+    if (this.txtInput.invalid) {
+      return;
+    }
+
+    if (this.txtInput.value === this.todo.texto) {
+      return;
+    }
+
+    this.store.dispatch(actions.editar({
+      id: this.todo.id,
+      texto: this.txtInput.value
+    }));
   }
 
+  public borrar(): void {
+    this.store.dispatch(actions.borrar({ id: this.todo.id }));
+  }
 }
