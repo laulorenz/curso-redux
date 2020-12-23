@@ -1,4 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.reducer';
+import * as actions from 'src/app/filtro/filtro.actions';
 
 @Component({
   selector: 'app-todo-footer',
@@ -8,9 +11,23 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class TodoFooterComponent implements OnInit {
 
-  constructor() { }
+  public filtroActual: actions.filtrosValidos;
+  public filtros: actions.filtrosValidos[] = ['todos', 'completados', 'pendientes'];
 
-  ngOnInit(): void {
+  constructor(
+    private store: Store<AppState>,
+    private changeDetectorRef: ChangeDetectorRef
+  ) { }
+
+  public ngOnInit(): void {
+    this.store.select('filtro').subscribe(filtro => {
+      this.filtroActual = filtro;
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  public cambiarFiltro(filtro: actions.filtrosValidos): void {
+    this.store.dispatch(actions.setFiltro({ filtro }));
   }
 
 }

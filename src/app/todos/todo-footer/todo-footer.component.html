@@ -7,19 +7,16 @@
   </span>
   <!-- Remove this if you don't implement routing -->
   <ul class="filters">
-    <li>
+    <li
+      *ngFor="let filtro of filtros"
+      (click)="cambiarFiltro(filtro)"
+    >
       <a
-        class="selected"
         href="#/"
+        [class.selected]="filtro === filtroActual"
       >
-        Todas
+        {{filtro}}
       </a>
-    </li>
-    <li>
-      <a href="#/active">Activos</a>
-    </li>
-    <li>
-      <a href="#/completed">Completados</a>
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->
