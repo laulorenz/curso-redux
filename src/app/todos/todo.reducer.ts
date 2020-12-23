@@ -12,7 +12,22 @@ export const estadoinicial: Todo[] = [
 
 const _todoReducer = createReducer(
   estadoinicial,
-  on(actions.crear, (state, { texto }) => [...state, new Todo(texto)])
+
+  on(actions.crear, (state, { texto }) => [...state, new Todo(texto)]),
+
+  on(actions.toggle, (state, { id }) => {
+    return state.map(todo => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          completado: !todo.completado
+        };
+      } else {
+        return todo;
+      }
+    });
+  }),
+
 )
 
 export function todoReducer(state, action) {
