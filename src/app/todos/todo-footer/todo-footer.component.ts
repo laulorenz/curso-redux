@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import * as actions from 'src/app/filtro/filtro.actions';
+import { borrarCompletados } from '../todo.actions';
 
 @Component({
   selector: 'app-todo-footer',
@@ -32,6 +33,10 @@ export class TodoFooterComponent implements OnInit {
 
   public cambiarFiltro(filtro: actions.filtrosValidos): void {
     this.store.dispatch(actions.setFiltro({ filtro }));
+  }
+
+  public limpiarCompletados(): void {
+    this.store.dispatch(borrarCompletados())
   }
 
 }
